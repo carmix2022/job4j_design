@@ -1,7 +1,7 @@
 package ru.job4j.generics;
 
 public class Predator extends Animal {
-    int countOfTeeth;
+    private int countOfTeeth;
 
     @Override
     public String toString() {

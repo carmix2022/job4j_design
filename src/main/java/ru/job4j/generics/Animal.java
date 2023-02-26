@@ -1,8 +1,8 @@
 package ru.job4j.generics;
 
 public class Animal {
-    int weight;
-    int height;
+    private int weight;
+    private int height;
 
     @Override
     public String toString() {

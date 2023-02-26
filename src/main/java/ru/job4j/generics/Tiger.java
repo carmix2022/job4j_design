@@ -1,7 +1,7 @@
 package ru.job4j.generics;
 
 public class Tiger extends Predator {
-    int countOfStripes;
+    private int countOfStripes;
 
     @Override
     public String toString() {
