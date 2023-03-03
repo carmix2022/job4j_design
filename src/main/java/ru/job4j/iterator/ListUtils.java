@@ -6,15 +6,12 @@ import java.util.function.Predicate;
 public class ListUtils {
 
     public static <T> void addBefore(List<T> list, int index, T value) {
-        list.add(index, value);
+        ListIterator<T> iterator = list.listIterator(index);
+        iterator.add(value);
     }
 
     public static <T> void addAfter(List<T> list, int index, T value) {
-        if (index == list.size() - 1) {
-            list.add(value);
-            return;
-        }
-        list.add(index + 1, value);
+        addBefore(list, index + 1, value);
     }
 
     public static <T> void removeIf(List<T> list, Predicate<T> filter) {
