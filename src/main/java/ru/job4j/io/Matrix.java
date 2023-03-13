@@ -18,9 +18,9 @@ public class Matrix {
             int[][] array = multiple(9);
             for (int[] i : array) {
                 for (int j : i) {
-                    out.write(Integer.toString(j).getBytes());
-                    out.write(System.lineSeparator().getBytes());
+                    out.write((j + "\t").getBytes());
                 }
+                out.write(System.lineSeparator().getBytes());
             }
         } catch (Exception e) {
             e.printStackTrace();
