@@ -3,6 +3,7 @@ package ru.job4j.io;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class LogFilter {
@@ -11,10 +12,10 @@ public class LogFilter {
         try (BufferedReader buff = new BufferedReader(new FileReader("data/log.txt"))) {
             rsl = buff.lines()
                     .map(s -> s.split(" "))
-                    .filter(k -> k[k.length - 2].equals("404"))
+                    .filter(k -> "404".equals(k[k.length - 2]))
                     .map(l -> String.join(" ", l))
                     .toList();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return rsl;
