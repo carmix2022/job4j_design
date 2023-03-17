@@ -29,7 +29,7 @@ public class Config {
     }
 
     private boolean check(String[] s) {
-        if (s[0].length() == 0  || s.length < 2 || s[1].length() == 0) {
+        if (s.length != 2 || s[0].isBlank() || s[1].isBlank()) {
             throw new IllegalArgumentException("file contains a key=value pattern violation");
         }
         return true;
