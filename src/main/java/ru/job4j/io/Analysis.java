@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class Analysis {
-    public void unavailable(String source, String target) {
+    public static void unavailable(String source, String target) {
         try (BufferedReader reader = new BufferedReader(new FileReader(source));
         PrintWriter writer = new PrintWriter(target)) {
             boolean server = true;
