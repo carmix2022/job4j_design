@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Config {
 
@@ -18,18 +19,20 @@ public class Config {
 
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            List<String[]> list = read.lines().filter(s -> !s.startsWith("#") && !s.isEmpty())
+            read.lines().filter(s -> !s.startsWith("#") && !s.isEmpty())
                     .map(s -> s.split("=", 2))
-                    .toList();
-            for (String[] s : list) {
-                if (s[0].length() == 0  || s.length < 2 || s[1].length() == 0) {
-                    throw new IllegalArgumentException("file contains a key=value pattern violation");
-                }
-            }
-            list.forEach(s -> values.put(s[0], s[1]));
+                    .filter(this::check)
+                    .forEach(s -> values.put(s[0], s[1]));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean check(String[] s) {
+        if (s[0].length() == 0  || s.length < 2 || s[1].length() == 0) {
+            throw new IllegalArgumentException("file contains a key=value pattern violation");
+        }
+        return true;
     }
 
     public String value(String key) {
