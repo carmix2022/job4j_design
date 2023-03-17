@@ -5,6 +5,7 @@ import org.junit.jupiter.api.io.TempDir;
 import java.io.*;
 import java.nio.file.Path;
 import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class AbuseTest {
@@ -16,7 +17,7 @@ class AbuseTest {
             out.println("hello foolish dude");
             out.println("java job4j php");
         }
-        File target  = tempDir.resolve("target.txt").toFile();
+        File target = tempDir.resolve("target.txt").toFile();
         Abuse.drop(source.getAbsolutePath(), target.getAbsolutePath(), List.of("foolish", "php"));
 
         StringBuilder rsl = new StringBuilder();
