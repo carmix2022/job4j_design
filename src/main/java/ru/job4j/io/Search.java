@@ -19,8 +19,8 @@ public class Search {
     }
 
     public static void valid(String[] args) {
-        if (args.length < 2) {
-            throw new IllegalArgumentException("Not enough arguments");
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Incorrect number of arguments");
         }
         Path test = Path.of(args[0]);
         if (!Files.exists(test)) {
@@ -29,8 +29,8 @@ public class Search {
         if (!Files.isDirectory(test)) {
             throw new IllegalArgumentException(String.format("Not directory %s", test.toAbsolutePath()));
         }
-        if (!args[1].startsWith(".")) {
-            throw new IllegalArgumentException("it's necessary to use a point sign");
+        if (!args[1].matches("\\.\\w+")) {
+            throw new IllegalArgumentException("Incorrect file extension");
         }
     }
 }
