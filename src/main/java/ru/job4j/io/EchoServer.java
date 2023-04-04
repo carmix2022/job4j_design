@@ -3,6 +3,7 @@ package ru.job4j.io;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.StringJoiner;
 
 public class EchoServer {
     public static void main(String[] args) throws IOException {
@@ -12,20 +13,28 @@ public class EchoServer {
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
-                    boolean exit = false;
+                    String answer = "";
+                    boolean firstLine = true;
                     for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
-                        if (str.contains("/?msg=Bye")) {
-                            exit = true;
+                        if (firstLine) {
+                            firstLine = false;
+                            if (!str.contains("/?msg=Exit") && !str.contains("/?msg=Hello")) {
+                                answer = str.substring(str.indexOf("/?msg=") + 6, str.lastIndexOf(" "));
+                            }
+                            if (str.contains("/?msg=Exit")) {
+                                answer = "Server is closed";
+                                server.close();
+                            }
+                            if (str.contains("/?msg=Hello")) {
+                                answer = "Hello";
+                            }
                         }
                         System.out.println(str);
+
                     }
-                    if (exit) {
-                        out.write("HTTP/1.1 499 Client Closed Request\r\n\r\n".getBytes());
-                        server.close();
-                        System.out.println("\nServer stopped");
-                    } else {
-                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                    }
+                    System.out.println();
+                    out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                    out.write(answer.getBytes());
                 }
             }
         }
