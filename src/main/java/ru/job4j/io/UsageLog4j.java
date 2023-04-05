@@ -15,6 +15,7 @@ public class UsageLog4j {
         int moneys = 500_000;
         short fine = 30_000;
         long favoriteNumber = 9_999_999_999L;
+        float favFloatNumber = 36.6f;
         double height = 180.5;
         LOG.debug("""
 
@@ -22,7 +23,8 @@ public class UsageLog4j {
                         name : {}, age : {}
                         proger : {}, sex : {}
                         moneys : {}, fine : {}
+                        favorite float number : {}
                         favorite number : {}, height : {}""",
-                name, age, proger, sex, moneys, fine, favoriteNumber, height);
+                name, age, proger, sex, moneys, fine, favFloatNumber, favoriteNumber, height);
     }
 }
