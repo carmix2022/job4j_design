@@ -13,28 +13,19 @@ public class EchoServer {
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
-                    String answer = "";
-                    boolean firstLine = true;
-                    for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
-                        if (firstLine) {
-                            firstLine = false;
-                            if (!str.contains("/?msg=Exit") && !str.contains("/?msg=Hello")) {
-                                answer = str.substring(str.indexOf("/?msg=") + 6, str.lastIndexOf(" "));
-                            }
-                            if (str.contains("/?msg=Exit")) {
-                                answer = "Server is closed";
-                                server.close();
-                            }
-                            if (str.contains("/?msg=Hello")) {
-                                answer = "Hello";
-                            }
-                        }
-                        System.out.println(str);
-
-                    }
-                    System.out.println();
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                    out.write(answer.getBytes());
+                    String str = in.readLine();
+                    if (!str.contains("/?msg=Exit") && !str.contains("/?msg=Hello")) {
+                        out.write(str.substring(str.indexOf("/?msg=") + 6, str.lastIndexOf(" ")).getBytes());
+                    }
+                    if (str.contains("/?msg=Exit")) {
+                        out.write("Server is closed".getBytes());
+                        server.close();
+                    }
+                    if (str.contains("/?msg=Hello")) {
+                        out.write("Hello".getBytes());
+                    }
+                    out.flush();
                 }
             }
         }
