@@ -1,0 +1,10 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<planet name="Jupiter" terrestrialPlanet="false" diameter="142984">
+    <feature feature="the largest planet"/>
+    <mainSatellites>
+        <satellite>Io</satellite>
+        <satellite>Ganymede</satellite>
+        <satellite>Europa</satellite>
+        <satellite>Kallysto</satellite>
+    </mainSatellites>
+</planet>
