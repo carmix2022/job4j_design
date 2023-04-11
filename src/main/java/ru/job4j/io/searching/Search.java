@@ -19,15 +19,12 @@ public class Search {
     }
 
     public static Predicate<Path> condition(ArgsName argsName) {
-        return switch (argsName.get("t")) {
-            case "regex" -> p -> p.toFile().getName().matches(argsName.get("n"));
-            case "mask" -> {
-                PathMatcher matcher =
-                        FileSystems.getDefault().getPathMatcher("glob:" + argsName.get("n"));
-                yield  p -> matcher.matches(p.getFileName());
-            }
-            default -> p -> p.toFile().getName().equals(argsName.get("n"));
-        };
+        final var name = argsName.get("n");
+        return p -> FileSystems.getDefault()
+                .getPathMatcher("mask".equals(argsName.get("t"))
+                        ? "glob:" + name
+                        : "regex:" + name)
+                .matches(p.getFileName());
     }
 
     public static void check(ArgsName argsName) {
