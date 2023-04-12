@@ -1,30 +1,17 @@
-create table books(
+create table groupsSport(
      id serial primary key,
      name varchar(255)
  );
 
- create table customers(
+ create table students(
      id serial primary key,
      name varchar(255)
+	 groupSport_id int references groupsSport(id)
  );
 
- create table books_customers(
-     id serial primary key,
-     book_id int references books(id),
-     customer_id int references customers(id)
- );
+insert into groupsSport(name) values ('swimming');
+insert into students(name, groupSport_id) values ('Ivan', 1);
 
-insert into customers(name) values ('Ivan');
-insert into customers(name) values ('Kirill');
-insert into customers(name) values ('Roman');
+select * from students;
 
-insert into books(name) values ('Война и мир');
-insert into books(name) values ('Что делать?');
-insert into books(name) values ('Колобок');
-
-insert into books_customers(book_id, customer_id) values (1, 1);
-insert into books_customers(book_id, customer_id) values (1, 2);
-insert into books_customers(book_id, customer_id) values (1, 3);
-insert into books_customers(book_id, customer_id) values (2, 1);
-insert into books_customers(book_id, customer_id) values (2, 2);
-insert into books_customers(book_id, customer_id) values (3, 3);
+select * from groupsSport where id in (select groupSport_id from students);

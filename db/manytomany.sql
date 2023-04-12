@@ -18,9 +18,9 @@ insert into customers(name) values ('Ivan');
 insert into customers(name) values ('Kirill');
 insert into customers(name) values ('Roman');
 
-insert into books(name) values ('Война и мир');
-insert into books(name) values ('Что делать?');
-insert into books(name) values ('Колобок');
+insert into books(name) values ('Voyna i mir');
+insert into books(name) values ('Chto delat?');
+insert into books(name) values ('Kolobok');
 
 insert into books_customers(book_id, customer_id) values (1, 1);
 insert into books_customers(book_id, customer_id) values (1, 2);
