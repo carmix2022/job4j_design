@@ -46,7 +46,7 @@ from type t
 join product p 
 on p.type_id = t.id
 group by t.name
-having count(*) <=2;
+having count(*) < 10;
 
 select p.name product, t.name type
 from type t 
